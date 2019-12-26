@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import com.bd.dao.UserDao;
 import com.bd.pojo.User;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -17,4 +19,7 @@ public class UserService {
         System.out.println(user);
     }
 
+    public List<User> findAll() {
+        return  userDao.findAll();
+    }
 }
