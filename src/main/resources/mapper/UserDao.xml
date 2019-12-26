@@ -10,4 +10,8 @@
     <select id="findAll"  resultType="User">
         select * from user
     </select>
+
+    <insert id="insertYouDao" >
+        insert into youdao set translation=#{youdao}
+    </insert>
 </mapper>

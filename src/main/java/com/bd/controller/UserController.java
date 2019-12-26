@@ -1,8 +1,11 @@
 package com.bd.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bd.pojo.User;
+import com.bd.youdao.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bd.service.UserService;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -30,11 +34,11 @@ public class UserController {
 
     /**
      *
-     * @param page 页面     默认在第一页
+     * @param pageNum 页面     默认在第一页
      * @param size 数据条数 默认为条数据
      * @return
      */
-    @RequestMapping("findAll.do")
+    @RequestMapping("findAll")
     public ModelAndView findAll(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int size) {
 
 
@@ -49,5 +53,19 @@ public class UserController {
         System.out.println("总页：" + page.getPages());
         return null;
     }
+
+    @RequestMapping("youdao")
+    public ModelAndView youDao() throws IOException {
+        ResLang resLang =new ResLang();
+        String youdaofanyi = FanyiV3Demo.youdaofanyi(resLang);
+        Youdao youdao = JSONObject.parseObject(youdaofanyi, Youdao.class);
+        Language language = FanyiV3Demo.JsonOrString(youdao);
+        userService.insertYouDao(language);
+        return null;
+
+
+    }
+
+
 
 }

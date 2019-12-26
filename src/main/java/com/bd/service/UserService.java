@@ -1,5 +1,14 @@
 package com.bd.service;
 
+
+
+import com.alibaba.fastjson.JSONObject;
+import com.bd.youdao.Language;
+import com.bd.youdao.Web;
+import com.bd.youdao.Youdao;
+import net.sf.json.JSON;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +30,12 @@ public class UserService {
 
     public List<User> findAll() {
         return  userDao.findAll();
+    }
+
+    public void insertYouDao(Language youdao) {
+
+       userDao.insertYouDao(youdao);
+
+
     }
 }
