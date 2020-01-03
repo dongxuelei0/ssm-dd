@@ -5,11 +5,11 @@ import com.bd.pojo.User;
 import com.bd.youdao.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bd.service.UserService;
@@ -40,9 +40,6 @@ public class UserController {
      */
     @RequestMapping("findAll")
     public ModelAndView findAll(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "5") int size) {
-
-
-
         PageHelper.startPage(pageNum, size);   //第一个参数代表当前页码  第二个参数代表每页多少条记录数
         List<User> list = userService.findAll();
         PageInfo<User> page = new PageInfo<User>(list);
@@ -55,16 +52,27 @@ public class UserController {
     }
 
     @RequestMapping("youdao")
-    public ModelAndView youDao() throws IOException {
-        ResLang resLang =new ResLang();
+    public ModelAndView youDao(ResLang resLang) throws IOException {
+        resLang.setFrom("aoto");
         String youdaofanyi = FanyiV3Demo.youdaofanyi(resLang);
         Youdao youdao = JSONObject.parseObject(youdaofanyi, Youdao.class);
         Language language = FanyiV3Demo.JsonOrString(youdao);
         userService.insertYouDao(language);
         return null;
-
-
     }
+
+    @RequestMapping("lookup")
+    @ResponseBody
+    public List<String> lookup(ResLang resLang) throws IOException {
+        resLang.setFrom("aoto");
+        String youdaofanyi = FanyiV3Demo.youdaofanyi(resLang);
+        Youdao youdao = JSONObject.parseObject(youdaofanyi, Youdao.class);
+        return youdao.getTranslation();
+    }
+
+
+
+
 
 
 

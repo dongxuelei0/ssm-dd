@@ -12,6 +12,8 @@
     </select>
 
     <insert id="insertYouDao" >
-        insert into youdao set translation=#{youdao}
+        insert into youdao set tSpeakUrl=#{tSpeakUrl},returnPhrase=#{returnPhrase},web=#{web},query=#{query},translation=#{translation},errorCode=#{errorCode},
+        dict=#{dict},webdict=#{webdict},basic=#{basic},l=#{l},speakUrl=#{speakUrl}
+
     </insert>
 </mapper>
