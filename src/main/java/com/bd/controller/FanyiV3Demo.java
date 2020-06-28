@@ -38,7 +38,7 @@ public class FanyiV3Demo {
 
     public static void main(String[] args) throws IOException {
 
-       /* Map<String,String> params = new HashMap<String,String>();
+        Map<String,String> params = new HashMap<String,String>();
         String q = "假面骑士奥特曼";
         String salt = String.valueOf(System.currentTimeMillis());
         params.put("from", "zh-CHS");
@@ -52,8 +52,8 @@ public class FanyiV3Demo {
         params.put("q", q);
         params.put("salt", salt);
         params.put("sign", sign);
-        *//** 处理结果 *//*
-        requestForHttp(YOUDAO_URL,params);*/
+
+        requestForHttp(YOUDAO_URL,params);
     }
 
     public static String youdaofanyi(ResLang language) throws IOException {
